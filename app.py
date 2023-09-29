@@ -20,9 +20,16 @@ books = [
     },
 ]
 
-@app.route('/books')
+@app.route('/books', methods=['GET'])
 def get_books():
     return jsonify(books)
+
+@app.route('/books/<int:id>', methods=['GET'])
+def get_book_by_id(id):
+    for book in books:
+        if book.get('id') == id:
+            return jsonify(book)
+
 
 
 app.run(port=5000, host='localhost', debug=True)
